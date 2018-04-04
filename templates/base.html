@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    {% block head %}
+    <title>{% block title %}LAB 8{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        <a href="/">Return to Home Page</a>.
+        {% endblock %}
+    </div>
+</body>
+</html>
