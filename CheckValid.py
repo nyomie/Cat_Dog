@@ -11,7 +11,7 @@ def is_email(email):
     To see if user inputs existing email address.
     Return True or False
     """
-    return validate_email(email, verify="True")
+    return validate_email(email, verify=True)
 
 
 def is_new_user(email):

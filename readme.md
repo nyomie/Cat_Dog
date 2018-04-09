@@ -6,5 +6,5 @@ Cat_Dog learning project, using:
 5. flask
 6. jinja
 7. postgresql
-8. the list is still growing
+8. jquery
 

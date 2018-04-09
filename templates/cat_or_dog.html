@@ -6,9 +6,11 @@
 
 {% block content %}
 	<form action="/" method=post>
-        EMAIL : <input type="text" name="email"><br>
-        <input type="radio" name="cat_or_dog" id="option1" value="cat" checked="checked"> Cat </input><br>
-        <input type="radio" name="cat_or_dog" id="option2" value="dog"> Dog </input><br>
-    <input type="submit" value="SUBMIT">
+        EMAIL : <input type="text" name="email" required><br><br>
+        Choose one:<br>
+        <input type="radio" name="cat_or_dog" id="option1" value="cat" checked="checked" required> Cat </input><br>
+        <input type="radio" name="cat_or_dog" id="option2" value="dog"> Dog </input><br><br>
+        <input type="submit" id="submit" value="SUBMIT" name ="submit">
     </form>
 {% endblock %}
+

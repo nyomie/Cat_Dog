@@ -1,13 +1,11 @@
 # This will be our main web codes
 
-import logging
 import os
 import flask
 import jinja2
 import sys
 import Postgres
 import CheckValid
-from CheckValid import is_new_user
 
 
 """
@@ -62,7 +60,7 @@ def cat_or_dog():
     Show the form that includes the email and the cat or dog radio button
     """
     template = env.get_template('cat_or_dog.html')
-    html = template.render()
+    html =  template.render()
     return html
 
 
@@ -76,12 +74,12 @@ def display_result():
     if not CheckValid.is_email(email):
         return invalid_user()
 
-    if is_new_user(email):
-        db.insertData(table_name=table_name, values=[('EMAIL','CHOICE'),(email,choice)])
+    if CheckValid.is_new_user(email):
+        db.insert_data(table_name=table_name, values=[('EMAIL','CHOICE'),(email,choice)])
     else:
         return not_new_user_error()
 
-    data = db.aggregateResult(table_name=table_name, column_name='CHOICE')
+    data = db.aggregate_result(table_name=table_name, column_name='CHOICE')
     template = env.get_template('display_result.html')
     html = template.render(DATA=data)
     return html

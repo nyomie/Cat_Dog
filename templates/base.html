@@ -2,15 +2,47 @@
 <html>
 <head>
     {% block head %}
-    <title>{% block title %}LAB 8{% endblock %}</title>
+    <title>{% block title %}Project Nyomie{% endblock %}</title>
     {% endblock %}
+    <link rel="stylesheet" href="static/main_page.css">
+    <style>
+        header {
+            padding: 1em;
+            color: white;
+            background-color: black;
+            text-align: center;
+        }
+
+        footer {
+            position:absolute;
+            bottom:0;
+            width:100%;
+            padding: 1em;
+            color: white;
+            background-color: black;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        form {
+            margin-top: 70px;
+            margin-left: 170px;
+            padding: 1em;
+        }
+    </style>
 </head>
 <body>
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
+    <header><h1>Project Nyomie</h1></header>
+    <div style="width: 50%; float:left" id="content">{% block content %}{% endblock %}</div>
+    <div style="width: 50%; float:right" id="images">{% block image %}{% endblock %}</div>
+    <footer>
         {% block footer %}
-        <a href="/">Return to Home Page</a>.
+        <a href="/">Return to Home Page</a>
         {% endblock %}
-    </div>
+    </footer>
+
 </body>
 </html>
