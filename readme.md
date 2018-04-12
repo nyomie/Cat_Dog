@@ -6,6 +6,5 @@ Cat_Dog learning project, using:
 5. flask
 6. jinja
 7. postgresql
-8. jquery
-9. matplotlib
+8. matplotlib
 
