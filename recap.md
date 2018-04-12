@@ -16,10 +16,16 @@
 3. Add snapshot to the local repo
 4. Push it to GitHub
 
-## Add recap.md
+## Update feature
 
 1. pip install validate_email and py3dns
 2. Add validate_email library
 3. Add form validation through HTML
 4. Add some CSS
 5. Snapshot --> Local repo --> Github
+
+## Update feature
+
+1. Fix HTML/CSS
+2. Add Matplotlib function
+3.Snapshot --> Local repo --> Github

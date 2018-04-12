@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    {{ error_if_any }}
 	<table  border="1">
     {% for t in DATA %}
         <tr>
@@ -14,4 +15,7 @@
         </tr>
     {% endfor %}
     </table>
+    <br>
+    <br>
+    <img src= "{{ chart }}" width="500">
 {% endblock %}

@@ -1,19 +1,23 @@
 # This will be our main web codes
 
 import os
+import io
+import urllib
+
 import flask
 import jinja2
 import sys
 import Postgres
 import CheckValid
-
+import Chart
 
 """
 collection of global variables that we need
 """
 
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_url_path='/static')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 env = jinja2.Environment(
     loader=jinja2.PackageLoader(__name__,
                                 'templates'))
@@ -35,7 +39,8 @@ db = Postgres.Postgres(database=database,
 if not db.connect():
     sys.exit(1)
 
-db.create_table(table_name=table_name, table_list=[("EMAIL", "text"), ("CHOICE", "text")])
+# Only run this line when it runs on your local computer first time
+# db.create_table(table_name=table_name, table_list=[("EMAIL", "text"), ("CHOICE", "text")])
 
 
 """
@@ -76,13 +81,22 @@ def display_result():
 
     if CheckValid.is_new_user(email):
         db.insert_data(table_name=table_name, values=[('EMAIL','CHOICE'),(email,choice)])
+        error = ''
     else:
-        return not_new_user_error()
+        error = 'You already did this poll. Come back when we have new poll. <br><br>'
 
     data = db.aggregate_result(table_name=table_name, column_name='CHOICE')
+    Chart.Chart(data)
+    # chart = Chart.Chart(data)
+    # canvas= chart.get_canvas()
+    # png_output = io.BytesIO()
+    # canvas.print_png(png_output)
+    # png_output = png_output.getvalue().encode("base64")
     template = env.get_template('display_result.html')
-    html = template.render(DATA=data)
+    html = template.render(error_if_any=error, DATA=data, chart = 'static/chart.png')
     return html
+    # return flask.render_template('display_result.html', error_if_any=error, DATA=data,
+    #                              image= urllib.quote)
 
 
 @app.errorhandler(404)
@@ -104,18 +118,20 @@ def invalid_user():
     return html
 
 
-def not_new_user_error():
-    """
-    Not new user error handler page
-    """
-    template = env.get_template('error.html')
-    html = template.render(ERROR="409", message="You already did this poll. Come back when we have new poll.")
-    return html
-
-
 if __name__ == '__main__':
     """
     Application entry point
     """
     use_debugger = True
     app.run(debug=True)
+
+
+# No caching at all for API endpoints.
+@app.after_request
+def add_header(response):
+    response.cache_control.no_store = True
+    response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, ' \
+                                        'post-check=0, pre-check=0, max-age=0'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '-1'
+    return response

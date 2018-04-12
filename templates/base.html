@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="static/main_page.css">
     <style>
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             padding: 1em;
             color: white;
             background-color: black;
@@ -14,9 +18,10 @@
         }
 
         footer {
-            position:absolute;
-            bottom:0;
-            width:100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             padding: 1em;
             color: white;
             background-color: black;
@@ -27,9 +32,10 @@
             color: white;
         }
 
-        form {
-            margin-top: 70px;
+        #content {
+            margin-top: 170px;
             margin-left: 170px;
+            margin-bottom: 100px;
             padding: 1em;
         }
     </style>
@@ -37,7 +43,7 @@
 <body>
     <header><h1>Project Nyomie</h1></header>
     <div style="width: 50%; float:left" id="content">{% block content %}{% endblock %}</div>
-    <div style="width: 50%; float:right" id="images">{% block image %}{% endblock %}</div>
+    <div style="width: 50%; float:right" id="google">{% block google %}{% endblock %}</div>
     <footer>
         {% block footer %}
         <a href="/">Return to Home Page</a>
