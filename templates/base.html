@@ -36,14 +36,16 @@
             margin-top: 170px;
             margin-left: 170px;
             margin-bottom: 100px;
-            padding: 1em;
         }
+
     </style>
 </head>
 <body>
     <header><h1>Project Nyomie</h1></header>
-    <div style="width: 50%; float:left" id="content">{% block content %}{% endblock %}</div>
-    <div style="width: 50%; float:right" id="google">{% block google %}{% endblock %}</div>
+    <div id="content">
+        {% block content %}{% endblock %}
+        {% block google_content %}{% endblock %}
+    </div>
     <footer>
         {% block footer %}
         <a href="/">Return to Home Page</a>

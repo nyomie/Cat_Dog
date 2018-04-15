@@ -30,7 +30,12 @@
 2. Add Matplotlib function
 3. Snapshot --> Local repo --> Github
 
-## Build API
+## Building API plus adding google search function
 1. pip install flask_restful
 2. Add API function
 3. Snapshot --> Local repo --> Github
+4. pip install google
+5. Add google search function
+6. Fix Html/CSS
+7. Organize file (Non-executable files are moved to lib directory)
+6. Snapshot --> Local repo --> Github

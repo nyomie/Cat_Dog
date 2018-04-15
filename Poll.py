@@ -5,11 +5,7 @@ import flask
 import jinja2
 import sys
 from flask_restful import Api
-import Postgres
-import CheckValid
-import Chart
-import CatDogAPI
-
+from lib import CheckValid, GoogleSearch, ProjectAPI, Chart, Postgres
 
 """
 collection of global variables that we need
@@ -27,6 +23,9 @@ database = 'postgres'                              # Your postgres database name
 user = 'postgres'                                  # Your postgres user name
 password = os.getenv('PASSWORD')                   # Set your password in environment variable named 'PASSWORD'
 table_name = "Poll_Cat_Dog"
+main_page = 'cat_or_dog.html'
+question = 'cat_or_dog'
+
 
 """
 Connecting to database and creating table to store respond
@@ -56,15 +55,15 @@ def front_page():
     if flask.request.method == 'POST':
         html = display_result()
     else:
-        html = cat_or_dog()
+        html = main_form()
     return html
 
 
-def cat_or_dog():
+def main_form():
     """
     Show the form that includes the email and the cat or dog radio button
     """
-    template = env.get_template('cat_or_dog.html')
+    template = env.get_template(main_page)
     html =  template.render()
     return html
 
@@ -74,7 +73,7 @@ def display_result():
     Display stock data
     """
     email = flask.request.form['email'].upper()
-    choice = flask.request.form['cat_or_dog']
+    choice = flask.request.form[question]
 
     if not CheckValid.is_email(email):
         return invalid_user()
@@ -87,10 +86,12 @@ def display_result():
 
     data = db.aggregate_result(table_name=table_name, column_name='CHOICE')
     Chart.Chart(data)
-    template = env.get_template('display_result.html')
-    html = template.render(error_if_any=error, DATA=data, chart = 'static/chart.png')
-    return html
 
+    google_search = GoogleSearch.GoogleSearch(choice, 3)
+    google_result = google_search.search()
+    template = env.get_template('display_result.html')
+    html = template.render(error_if_any=error, DATA=data, chart='static/chart.png', google_result=google_result)
+    return html
 
 
 @app.errorhandler(404)
@@ -111,8 +112,14 @@ def invalid_user():
     html = template.render(ERROR="401", message="Invalid email")
     return html
 
-api.add_resource(CatDogAPI.Aggregate_Result, '/poll_result')
-api.add_resource(CatDogAPI.List_Vote,"/list_vote/<string:choice>")
+
+"""
+API
+"""
+
+
+api.add_resource(ProjectAPI.Aggregate_Result, '/poll_result')
+api.add_resource(ProjectAPI.List_Vote, "/list_vote/<string:choice>")
 
 
 if __name__ == '__main__':
@@ -123,7 +130,9 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-# No caching at all for API endpoints.
+"""
+No caching at all for API endpoints.
+"""
 @app.after_request
 def add_header(response):
     response.cache_control.no_store = True

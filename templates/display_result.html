@@ -18,4 +18,16 @@
     <br>
     <br>
     <img src= "{{ chart }}" width="500">
+    <br>
+    <br>
+    <br>
+{% endblock %}
+
+{% block google_content %}
+    Top 3 google result about your preference: <br>
+    {% for dict in google_result %}
+        {% for key,value in dict.items() %}
+            <a href="{{value}}">{{key}}</a><br>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
