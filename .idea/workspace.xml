@@ -4,22 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/lib/GoogleSearch.py" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c90231af-f83a-4d5f-a1da-2be57da522ce" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CatDogAPI.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Chart.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/CheckValid.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/GoogleSearch.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/Poll.py" afterPath="$PROJECT_DIR$/Poll.py" />
-      <change beforePath="$PROJECT_DIR$/Postgres.py" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/catdog.log" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
-      <change beforePath="$PROJECT_DIR$/recap.md" afterPath="$PROJECT_DIR$/recap.md" />
-      <change beforePath="$PROJECT_DIR$/setup.cfg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change beforePath="$PROJECT_DIR$/templates/display_result.html" afterPath="$PROJECT_DIR$/templates/display_result.html" />
-    </list>
+    <list default="true" id="c90231af-f83a-4d5f-a1da-2be57da522ce" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
