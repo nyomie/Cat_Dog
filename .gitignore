@@ -2,7 +2,7 @@ venv
 .pyc
 .DS_Store
 __pycache__/
-.idea
+.idea/
 
 # Unit test / coverage reports
 TestPostgres.py
