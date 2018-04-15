@@ -146,7 +146,7 @@ class Postgres:
         self.execute_command(command_string)
 
         try:
-            return self.cursor.fetchone()
+            return self.cursor.fetchall()
         except Exception as e:
             logging.info("No specific data found: " + str(e))
             return None

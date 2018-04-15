@@ -4,7 +4,8 @@ Cat_Dog learning project, using:
 3. pip
 4. git
 5. flask
-6. jinja
-7. postgresql
-8. matplotlib
-
+6. flask_restful
+7. jinja
+8. psycopg2
+9. postgresql
+10. matplotlib

@@ -28,4 +28,9 @@
 
 1. Fix HTML/CSS
 2. Add Matplotlib function
-3.Snapshot --> Local repo --> Github
+3. Snapshot --> Local repo --> Github
+
+## Build API
+1. pip install flask_restful
+2. Add API function
+3. Snapshot --> Local repo --> Github

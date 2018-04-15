@@ -1,15 +1,15 @@
 # This will be our main web codes
 
 import os
-import io
-import urllib
-
 import flask
 import jinja2
 import sys
+from flask_restful import Api
 import Postgres
 import CheckValid
 import Chart
+import CatDogAPI
+
 
 """
 collection of global variables that we need
@@ -17,6 +17,7 @@ collection of global variables that we need
 
 
 app = flask.Flask(__name__, static_url_path='/static')
+api = Api(app)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 env = jinja2.Environment(
     loader=jinja2.PackageLoader(__name__,
@@ -26,7 +27,6 @@ database = 'postgres'                              # Your postgres database name
 user = 'postgres'                                  # Your postgres user name
 password = os.getenv('PASSWORD')                   # Set your password in environment variable named 'PASSWORD'
 table_name = "Poll_Cat_Dog"
-
 
 """
 Connecting to database and creating table to store respond
@@ -39,8 +39,8 @@ db = Postgres.Postgres(database=database,
 if not db.connect():
     sys.exit(1)
 
-# Only run this line when it runs on your local computer first time
-# db.create_table(table_name=table_name, table_list=[("EMAIL", "text"), ("CHOICE", "text")])
+# Only run these lines when it runs on your local computer first time:
+# db.create_table(table_name=table_name, table_list=[("email", "text"), ("choice", "text")])
 
 
 """
@@ -87,16 +87,10 @@ def display_result():
 
     data = db.aggregate_result(table_name=table_name, column_name='CHOICE')
     Chart.Chart(data)
-    # chart = Chart.Chart(data)
-    # canvas= chart.get_canvas()
-    # png_output = io.BytesIO()
-    # canvas.print_png(png_output)
-    # png_output = png_output.getvalue().encode("base64")
     template = env.get_template('display_result.html')
     html = template.render(error_if_any=error, DATA=data, chart = 'static/chart.png')
     return html
-    # return flask.render_template('display_result.html', error_if_any=error, DATA=data,
-    #                              image= urllib.quote)
+
 
 
 @app.errorhandler(404)
@@ -116,6 +110,9 @@ def invalid_user():
     template = env.get_template('error.html')
     html = template.render(ERROR="401", message="Invalid email")
     return html
+
+api.add_resource(CatDogAPI.Aggregate_Result, '/poll_result')
+api.add_resource(CatDogAPI.List_Vote,"/list_vote/<string:choice>")
 
 
 if __name__ == '__main__':
